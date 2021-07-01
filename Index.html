@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script>
+        $(document).ready(function() {
+            $('#btnAdd').hide();
+            $('#add_details').hide();
+            $('#fade_in').hide();
+
+            var totalRecords = parseInt($("table>tbody>tr>th:last").text());
+            $('#btnClick').click(function() {
+                $('table').toggle(function() {
+                    if ($(img_man).is(":hidden")) {
+                        $("#img_man").slideDown("slow");
+                    } else {
+                        $("#img_man").slideUp("slow");
+                    }
+                });
+
+            });
+
+            $('#btnNew').click(function() {
+                if ($('#btnNew').attr("value") == "Cancel") {
+                    $('#add_details').hide();
+                    $('#btnNew').attr("value", "New records");
+                    $('#btnAdd').hide();
+                } else {
+
+                    $('#add_details').show();
+                    $('#btnNew').attr("value", "Cancel");
+                    $('#btnAdd').show();
+                }
+            });
+
+
+            $('#btnAdd').click(function() {
+                var btnDelete = $('<input/>').attr({
+                    type: "button",
+                    value: "delete records",
+                    class: "btn btn-outline-danger btnDelete"
+                });
+                totalRecords = totalRecords + 1;
+                $("table>tbody").append("<tr><th>" + totalRecords + "</th><td>" + $("#f_name").val() + "</td><td>" + $("#l_name").val() + "</td><td>" + $("#handle").val() + "</td><td></td></tr>");
+                $("table>tbody>tr>td:last").append(btnDelete);
+
+            });
+
+            $('#more_info').hover(function() {
+                $('#more_information').slideToggle("slow");
+
+            });
+            $('#btnFadeIn').click(function() {
+                if ($(fade_in).is(":hidden")) {
+                    $('#fade_in').fadeIn(5000);
+                } else {
+                    $('#fade_in').fadeOut(5000);
+                    $('#fade_in').addClass('fade_out');
+                }
+
+            });
+
+            $('#btnFadeToggle').click(function() {
+                $('#fade_toggle').fadeToggle(5000);
+            });
+
+            $('#btnBefore').click(function() {
+                $('#img_man').before("<p>Added Instructions to the man before</p>");
+            });
+
+            $('#btnAfter').click(function() {
+                $('#img_man').after("<p>Added Instructions to the man after</p>");
+            });
+            $('.btnDelete').click(function() {
+                $(this).closest('tr').remove();
+                if ($('table tbody').children().children().length == 0) {
+                    $('table').hide();
+                    $('#btnClick').hide();
+                }
+            });
+        });
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+
+
+        <p>Fade In and Fade out based on visibility</p>
+        <input type="button" value="fade In" id="btnFadeIn">
+        <div id="fade_in">
+            This div Fades in
+        </div>
+        <p>FadeToggle</p>
+        <input type="button" value="fade Toggle" id="btnFadeToggle">
+        <div id="fade_toggle">
+            This div Fades in and fades out
+        </div>
+        <input type="button" value="Add instructions for man before" id="btnBefore">
+        <input type="button" value="Add instructions for man after" id="btnAfter">
+        <img id="img_man" src="images/man_bus.png" alt="man's image">
+        <p>Clicking on the button hides and shows the table below(using toggle() function). The records from the table are deleted using remove(). if all the records are deleted then you cannot see the table and show button anymore.</p>
+        <input type="button" id="btnClick" class="btn btn-outline-danger" " " value="show records" />
+        <a id="more_info" href="#">less...</a>
+        <div id="more_information">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet ipsam perspiciatis saepe tenetur iure veniam atque nihil ad ab, repellendus, sequi commodi, excepturi soluta cum libero vitae praesentium iusto asperiores.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste sit necessitatibus sint hic, numquam quam optio consequuntur perspiciatis ipsa? Molestiae dicta quos facilis at, consequuntur maxime eaque nulla doloribus! Minima.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eos dignissimos dolorum sunt minima ullam molestias provident qui animi nesciunt? Nemo, possimus? Illo laborum assumenda tenetur ducimus non. Distinctio, expedita.</p>
+        </div>
+        <table class="table table-striped">
+            <thead thead-dark>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                    <th scope="col">delete record</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td> Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td><input type="button" class="btn btn-outline-danger btnDelete" value="delete records" /></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td><input type="button" class="btn btn-outline-danger btnDelete" value="delete records" /></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td><input type="button" class="btn btn-outline-danger btnDelete" value="delete records" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <p>The below button will add new records to the table.</p>
+        <input type="button" id="btnNew" class="btn btn-outline-danger" " " value="New records" />
+        <input type="button" id="btnAdd" class="btn btn-outline-danger" " " value="Submit" />
+        <div id="add_details">
+            <input id="f_name" type=text placeholder="Input first name here">
+            <input id="l_name" type=text placeholder="Input last name here">
+            <input id="handle" type=text placeholder="Input handle here">
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

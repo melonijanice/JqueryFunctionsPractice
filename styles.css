@@ -1,0 +1,18 @@
+img {
+    width: 5em;
+    height: 10em;
+}
+
+#fade_in {
+    background-color: aqua;
+    height: 300px;
+}
+
+.fade_out {
+    height: 100px;
+}
+
+#fade_toggle {
+    background-color: aqua;
+    height: 300px;
+}
